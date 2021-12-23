@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to assignment8</title>
+</head>
+
+<body>
+{% include 'Header.html' %}
+<H1>Welcome to assignment8</H1>
+<h2>My preferences in films:  </h2>
+<ol>
+    <li>{{ films[0] }}</li>
+    <li>{{ films[1] }}</li>
+    <li>{{ films[2] }}</li>
+</ol>
+
+<h2>My Hobbies are:  </h2>
+<ol>
+  {% for hobby in Hobbies %}
+      <li>{{ hobby }}</li>
+  {% endfor %}
+</ol>
+
+
+
+
+
+
+</body>
+</html>
