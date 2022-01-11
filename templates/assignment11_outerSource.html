@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>assignment 11- Outer Source</title>
+</head>
+<body>
+<h1> Outer Source</h1>
+
+    <h2> Request Frontend</h2>
+        <script src="../static/js/assignment11.js"></script>
+
+            <input type="number" name="number_frontend" id="id">
+            <input type="submit" value="Get User" onclick="getUsers()">
+        <main>
+        </main>
+
+
+    <h2> Request Backend</h2>
+
+        <form action="/assignment11/outer_source">
+            <input type="number" name="number">
+            <input type="submit" value="Get User">
+        </form>
+
+    {% if User %}
+        <h3> User {{ User.data.id }} :</h3>
+        <img src="{{ User.data.avatar }}" alt="pic">
+        <h4> Name: {{ User.data.first_name }}  {{ User.data.last_name }}</h4>
+        <h4> Email: {{ User.data.email }}</h4>
+    {% endif %}
+
+</body>
+</html>
