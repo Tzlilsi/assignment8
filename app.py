@@ -1,6 +1,8 @@
 from flask import Flask
 from flask import render_template, redirect, url_for
-from flask import request, session
+from flask import request, session, jsonify
+import requests
+import random
 from interact_with_DB import *
 
 
@@ -63,3 +65,28 @@ def logout():
 ## assignment10
 from assignment10.assignment10 import assignment10
 app.register_blueprint(assignment10)
+
+@app.route('/assignment11/users')
+def assignment11_users_func():
+    query = ' select * from users;'
+    users = interact_db(query=query, query_type='fetch')
+    response = jsonify(users)
+    return response
+
+
+def get_user(num):
+    res = requests.get(f'https://reqres.in/api/users/{num}')
+    res = res.json()
+    return res
+
+
+@app.route('/assignment11/outer_source')
+def assignment11_outer_source_func():
+    num = 7
+    if "number" in request.args:
+        num = int(request.args['number'])
+    user = get_user(num)
+    return render_template('assignment11_outerSource.html', User=user)
+
+if __name__ == '__main__':
+    app.run(debug=True)
