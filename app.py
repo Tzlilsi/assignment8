@@ -5,9 +5,9 @@ import requests
 import random
 from interact_with_DB import *
 
-
 app = Flask(__name__)
 app.secret_key = '12345'
+
 
 @app.route('/home_page')
 @app.route('/home')
@@ -27,14 +27,12 @@ def assignment8_func():  # put application's code here
 
 
 users = {'user1': {'name': 'Tzlil', 'email': 'tzlilsimka@gmail.com'},
-        'user2': {'name': 'Daniel', 'email': 'daniel1@gmail.com'},
-        'user3': {'name': 'Limor', 'email': 'limor@gmail.com'},
-        'user4': {'name': 'Tali', 'email': 'Tali776@gmail.com'},
-        'user5': {'name': 'Liam', 'email': 'Liam@gmail.com'},
-         'user6' : {'name': 'Roy', 'email': 'Roy69@gmail.com'},
+         'user2': {'name': 'Daniel', 'email': 'daniel1@gmail.com'},
+         'user3': {'name': 'Limor', 'email': 'limor@gmail.com'},
+         'user4': {'name': 'Tali', 'email': 'Tali776@gmail.com'},
+         'user5': {'name': 'Liam', 'email': 'Liam@gmail.com'},
+         'user6': {'name': 'Roy', 'email': 'Roy69@gmail.com'},
          'user7': {'name': 'Gal', 'email': 'arnon69@gmail.com'}}
-
-
 
 
 @app.route('/assignment9', methods=["get", "post"])
@@ -62,12 +60,15 @@ def logout():
     session['nickname'] = None
     return redirect(url_for('home'))
 
+
 ## assignment10
 from assignment10.assignment10 import assignment10
+
 app.register_blueprint(assignment10)
 
+
 @app.route('/assignment11/users')
-def assignment11_users_func():
+def assignment11_func():
     query = ' select * from users;'
     users = interact_db(query=query, query_type='fetch')
     response = jsonify(users)
@@ -81,12 +82,13 @@ def get_user(num):
 
 
 @app.route('/assignment11/outer_source')
-def assignment11_outer_source_func():
-    num = 7
+def assignment11_func1():
+    num = 3
     if "number" in request.args:
         num = int(request.args['number'])
-    user = get_user(num)
-    return render_template('assignment11_outerSource.html', User=user)
+        user1 = get_user(num)
+    return render_template('assignment11_outerSource.html', User=user1)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
