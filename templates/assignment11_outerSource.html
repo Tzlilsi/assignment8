@@ -5,21 +5,20 @@
     <title>assignment 11- Outer Source</title>
 </head>
 <body>
-<h1> Outer Source</h1>
+ {% include 'Header.html' %}
+<h1> assignment 11 - Outer Source</h1>
 
-    <h2> Request Frontend (fetch function - js). </h2>
+    <h2> Request Frontend</h2>
         <script src="../static/js/assignment11.js"></script>
-
-            <input type="number" name="number_frontend" id="id">
+        <form action="/assignment11/outer_source">
+            <input type="number" name="number" id="id">
             <input type="submit" value="Get User" onclick="getUsers()">
-        <main>
-        </main>
+        </form>
 
-
-    <h2> Request Backend (import requests - python)</h2>
+    <h2> Request Backend</h2>
 
         <form action="/assignment11/outer_source">
-            <input type="number" name="number">
+            <input type="number" name="number" id="id">
             <input type="submit" value="Get User">
         </form>
 

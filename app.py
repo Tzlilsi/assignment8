@@ -67,7 +67,7 @@ from assignment10.assignment10 import assignment10
 app.register_blueprint(assignment10)
 
 @app.route('/assignment11/users')
-def assignment11_users_func():
+def assignment11_func():
     query = ' select * from users;'
     users = interact_db(query=query, query_type='fetch')
     response = jsonify(users)
@@ -81,12 +81,33 @@ def get_user(num):
 
 
 @app.route('/assignment11/outer_source')
-def assignment11_outer_source_func():
-    num = 7
+def assignment11_func1():
+    num = 3
     if "number" in request.args:
         num = int(request.args['number'])
     user = get_user(num)
     return render_template('assignment11_outerSource.html', User=user)
+
+
+@app.route('/assignment12/restapi_users', defaults={'user_id': 12})
+@app.route('/assignment12/restapi_users/<int:user_id>')
+def get_users_func(user_id):
+    query = 'select * from users where id=%s;' % user_id
+    users = interact_db(query=query, query_type='fetch')
+    if len(users) == 0:
+        return_dict = {
+            'status': 'failed',
+            'message': 'user not found'
+        }
+    else:
+        return_dict = {
+            'status': 'success',
+            f'id': users[0].id,
+            'name': users[0].name,
+            'email': users[0].email,
+        }
+    return jsonify(return_dict)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
